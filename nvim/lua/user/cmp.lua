@@ -1,10 +1,12 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
+  vim.notify("Error requiring cmp")
   return
 end
 
-local snip_status_ok, luasnip = pcall(require, "luasnip")
+local snip_status_ok, luasnip = pcall(require, "LuaSnip")
 if not snip_status_ok then
+  vim.notify("Error requiring luasnip")
   return
 end
 
