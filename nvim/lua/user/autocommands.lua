@@ -7,6 +7,11 @@ vim.cmd [[
     autocmd FileType qf set nobuflisted
   augroup end
 
+  augroup _auto_save
+    autocmd!
+    autocmd TextChanged,FocusLost,BufEnter * silent update
+  augroup end
+
   augroup _git
     autocmd!
     autocmd FileType gitcommit setlocal wrap
