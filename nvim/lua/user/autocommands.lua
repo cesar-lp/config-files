@@ -1,4 +1,4 @@
-vim.cmd [[
+vim.cmd([[
   augroup _general_settings
     autocmd!
     autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR> 
@@ -7,36 +7,50 @@ vim.cmd [[
     autocmd FileType qf set nobuflisted
   augroup end
 
-  augroup _auto_save
-    autocmd!
-    autocmd TextChanged,FocusLost,BufEnter * silent update
-  augroup end
-
-  augroup _git
-    autocmd!
-    autocmd FileType gitcommit setlocal wrap
-    autocmd FileType gitcommit setlocal spell
-  augroup end
-
-  augroup _markdown
-    autocmd!
-    autocmd FileType markdown setlocal wrap
-    autocmd FileType markdown setlocal spell
-  augroup end
-
-  augroup _auto_resize
-    autocmd!
-    autocmd VimResized * tabdo wincmd = 
-  augroup end
-
-  augroup _alpha
+  augroup _alpha!
     autocmd!
     autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
   augroup end
-]]
+]])
 
--- Autoformat
--- augroup _lsp
---   autocmd!
---   autocmd BufWritePre * lua vim.lsp.buf.formatting()
--- augroup end
+local function autocmd(event, opts)
+	vim.api.nvim_create_autocmd(event, opts)
+end
+
+local function augroup(event)
+	return vim.api.nvim_create_augroup(event, { clear = true })
+end
+
+local filesPattern = { "*.lua", "*.js", "*.ts", "*.rs", "*.go", "*.json" }
+
+-- Format on save
+local autoFormattingGroup = augroup("FormatOnSave")
+autocmd("BufWritePre", {
+	group = autoFormattingGroup,
+	pattern = filesPattern,
+	callback = function()
+		vim.lsp.buf.formatting_sync()
+	end,
+})
+
+-- -- Auto save
+-- local autoSaveGrop = augroup("AutoSave")
+-- autocmd({ "FocusLost", "BufEnter" }, {
+-- 	group = autoSaveGrop,
+-- 	pattern = filesPattern,
+-- 	command = "silent update",
+-- })
+
+-- Auto resize
+local autoResizeGroup = augroup("AutoResize")
+autocmd("VimResized", { group = autoResizeGroup, command = "tabdo wincmd =_" })
+
+-- GIT
+local gitGroup = augroup("GIT")
+autocmd("FileType", { pattern = { "gitcommit" }, group = gitGroup, command = "setlocal wrap" })
+autocmd("FileType", { pattern = { "gitcommit" }, group = gitGroup, command = "setlocal spell" })
+
+-- Markdown
+local markdownGroup = augroup("Markdown")
+autocmd("FileType", { pattern = { "markdown" }, group = markdownGroup, command = "setlocal wrap" })
+autocmd("FileType", { pattern = { "markdown" }, group = markdownGroup, command = "setlocal spell" })
