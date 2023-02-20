@@ -64,8 +64,8 @@ nvim_tree.setup {
     timeout = 500,
   },
   view = {
-    width = 30,
-    height = 30,
+    width = 40,
+    -- height = 30, TODO: figure out under which key should be remapped
     hide_root_folder = false,
     side = "left",
     mappings = {
