@@ -84,7 +84,7 @@ return packer.startup(function(use)
   use { "simrat39/rust-tools.nvim", commit = "bd1aa99ffb911a1cf99b3fcf3b44c0391c57e3ef" }
 
   -- Lua
-  --[[ use { "folke/trouble.nvim", requires = "nvim-tree/nvim-web-devicons", commit = "3b754285635a66a93aeb15fa71a23417d8997217" } ]]
+  use { "folke/trouble.nvim", requires = "nvim-tree/nvim-web-devicons", commit = "3b754285635a66a93aeb15fa71a23417d8997217" }
 
   -- Telescope
   use { "nvim-telescope/telescope.nvim", commit = "76ea9a898d3307244dce3573392dcf2cc38f340f" }
