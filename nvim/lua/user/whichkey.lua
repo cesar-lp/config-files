@@ -88,7 +88,14 @@ local mappings = {
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
-  ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+  
+  c = {
+    name = "Close Buffer",
+    c = { "<cmd>Bdelete!<CR>", "Close current buffer" },
+    a = { "<cmd>:%bd|Bdelete!<cr>", "Close all buffers" },
+    o = { "<cmd>:%bd|e#|bd#<cr>", "Close all other buffers" },
+  },
+
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["f"] = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
