@@ -85,6 +85,12 @@ M.on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
   end
 
+  if client.name == "rust_analizer" then
+    client.cmd = {
+      "rustup", "run", "stable", "rust-analyzer"
+    }
+  end
+
   lsp_keymaps(bufnr)
 
   local status_ok, illuminate = pcall(require, "illuminate")
