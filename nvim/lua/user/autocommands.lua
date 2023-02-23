@@ -29,7 +29,7 @@ autocmd("BufWritePre", {
 	group = autoFormattingGroup,
 	pattern = filesPattern,
 	callback = function()
-		vim.lsp.buf.formatting_sync()
+		vim.lsp.buf.format {async = true }
 	end,
 })
 
