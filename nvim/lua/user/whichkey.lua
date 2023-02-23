@@ -85,17 +85,11 @@ local mappings = {
     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     "Buffers",
   },
+  ["c"] = { "<cmd>Bdelete!<cr>", "Close current buffer" },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
   
-  c = {
-    name = "Close Buffer",
-    c = { "<cmd>Bdelete!<CR>", "Close current buffer" },
-    a = { "<cmd>:%bd|Bdelete!<cr>", "Close all buffers" },
-    o = { "<cmd>:%bd|e#|bd#<cr>", "Close all other buffers" },
-  },
-
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["f"] = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
@@ -104,6 +98,13 @@ local mappings = {
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
   ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
   ["t"] = { "<cmd>TroubleToggle<cr>", "Trouble" },
+
+  C = {
+    name = "Close Buffer",
+    c = { "<cmd>Bdelete!<CR>", "Close current buffer" },
+    a = { "<cmd>:%bd|Bdelete!<cr>", "Close all buffers" },
+    o = { "<cmd>:%bd|e#|bd#<cr>", "Close all other buffers" },
+  },
 
   p = {
     name = "Packer",
@@ -168,6 +169,7 @@ local mappings = {
       "Workspace Symbols",
     },
   },
+
   s = {
     name = "Search",
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
@@ -179,8 +181,6 @@ local mappings = {
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     C = { "<cmd>Telescope commands<cr>", "Commands" },
   },
-
-
 
   T = {
     name = "Terminal",
