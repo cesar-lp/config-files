@@ -1,5 +1,4 @@
 local servers = {
-  --"lua_ls",
   "cssls",
   "html",
   "tsserver",
@@ -7,7 +6,8 @@ local servers = {
   "bashls",
   "jsonls",
   "yamlls",
-  "rust_analyzer"
+  "rust_analyzer",
+  "gopls"
 }
 
 local settings = {

@@ -17,6 +17,7 @@ require "user.project"
 require "user.impatient"
 require "user.indentline"
 --[[ require "user.trouble" ]]
+require "user.dap"
 require "user.alpha"
 require "user.whichkey"
 require "user.autocommands"

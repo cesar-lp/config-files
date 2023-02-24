@@ -89,7 +89,6 @@ local mappings = {
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
-  
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["f"] = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
@@ -103,6 +102,18 @@ local mappings = {
     c = { "<cmd>Bdelete!<CR>", "Close current buffer" },
     a = { "<cmd>:%bd|Bdelete!<cr>", "Close all buffers" },
     o = { "<cmd>:%bd|e#|bd#<cr>", "Close all other buffers" },
+  },
+
+  d = {
+    name = "Debugger",
+    p = { "<cmd>lua require 'dap'.toggle_breakpoint()<cr>", "Set breakpoint" },
+    P = { "<cmd>lua require 'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", "Set breakpoint (condition)" },
+    c = { "<cmd>lua require 'dap'.continue()<cr>", "Continue" },
+    o = { "<cmd>lua require 'dap'.step_over()<cr>", "Step over" },
+    O = { "<cmd>lua require 'dap'.step_out()<cr>", "Step out" },
+    i = { "<cmd>lua require 'dap'.step_into()<cr>", "Step into" },
+    r = { "<cmd>lua require 'dap'.repl.open()<cr>", "REPL" },
+--[[ vim.keymap.set("n", "<leader>lp", ":lua require 'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>") ]]
   },
 
   p = {
