@@ -1,64 +1,65 @@
-local status_ok, dap = pcall(require, "dap")
-if not status_ok then
-	vim.notify("Error requiring dap")
-	return
-end
+local function setup_extensions()
+  local dap, neodev, dap_ui, dap_vt = require "dap", require "neodev", require "dapui", require "nvim-dap-virtual-text"
 
-local status_ok, neodev = pcall(require, "neodev")
-if not status_ok then
-	vim.notify("Error requiring neodev")
-	return
-end
+  --[[ vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg = 0, fg = '#993939', bg = '#31353f' }) ]]
+  --[[ vim.api.nvim_set_hl(0, 'DapLogPoint', { ctermbg = 0, fg = '#61afef', bg = '#31353f' }) ]]
+  --[[ vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg = 0, fg = '#98c379', bg = '#31353f' }) ]]
 
-local status_ok, dapui = pcall(require, "dapui")
-if not status_ok then
-	vim.notify("Error requiring dapui")
-	return
-end
+  vim.api.nvim_set_hl(0, "blue",   { fg = "#3d59a1" }) 
+  vim.api.nvim_set_hl(0, "green",  { fg = "#9ece6a" }) 
+  vim.api.nvim_set_hl(0, "yellow", { fg = "#FFFF00" }) 
+  vim.api.nvim_set_hl(0, "orange", { fg = "#f09000" }) 
+  vim.api.nvim_set_hl(0, "lightblue", { fg = "#2A9FB4" })
 
-local status_ok, nvimdapvirtualtext = pcall(require, "nvim-dap-virtual-text")
-if not status_ok then
-	vim.notify("Error requiring nvim-dap-virtual-text")
-	return
-end
+  vim.fn.sign_define("DapBreakpoint", { text = "➤", texthl = "green", linehl = "DapBreakpoint", numhl = "DapBreakpoint" })
+  vim.fn.sign_define("DapStopped", { text = "➤", texthl = "orange", linehl = "lightblue", numhl = "orange" })
+  vim.fn.sign_define('DapBreakpointCondition', { text='•', texthl='blue',   linehl='DapBreakpoint', numhl='DapBreakpoint' })
+  vim.fn.sign_define('DapBreakpointRejected',  { text='•', texthl='orange', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+  vim.fn.sign_define('DapLogPoint',            { text='•', texthl='yellow', linehl='DapBreakpoint', numhl='DapBreakpoint' })
 
-nvimdapvirtualtext.setup()
-dapui.setup()
+  dap_vt.setup()
+  dap_ui.setup()
 
-dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open()
-  vim.keymap.set("n", "@", ":lua require 'dap'.step_over()<cr>")
-  vim.keymap.set("n", "#", ":lua require 'dap'.step_into()<cr>")
-  vim.keymap.set("n", "$", ":lua require 'dap'.step_out()<cr>")
-end
-
-dap.listeners.before.event_terminated["dapui_config"] = function()
-  dapui.close()
-end
-
-dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
-end
-
-neodev.setup({
-  library = {
-    plugins = {
-      "nvim-dap-ui"
-    },
-    types = true
-  }
-})
+  dap.listeners.after.event_initialized["dapui_config"] = function()
+    dap_ui.open()
+    vim.keymap.set("n", "@", ":lua require 'dap'.step_over()<cr>")
+    vim.keymap.set("n", "#", ":lua require 'dap'.step_into()<cr>")
+    vim.keymap.set("n", "$", ":lua require 'dap'.step_out()<cr>")
 
 --[[ vim.keymap.set("n", "<F5>", ":lua require 'dap'.continue()<cr>") ]]
---[[ vim.keymap.set("n", "<F10>", ":lua require 'dap'.step_over()<cr>") ]]
---[[ vim.keymap.set("n", "<F11>", ":lua require 'dap'.step_into()<cr>") ]]
---[[ vim.keymap.set("n", "<F12>", ":lua require 'dap'.step_out()<cr>") ]]
 --[[ vim.keymap.set("n", "<leader>b", ":lua require 'dap'.toggle_breakpoint()<cr>") ]]
 --[[ vim.keymap.set("n", "<leader>B", ":lua require 'dap'.set_breakpoint(vim.fn.input('Breakpoint conidition: '))<cr>") ]]
 --[[ vim.keymap.set("n", "<leader>lp", ":lua require 'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>") ]]
 --[[ vim.keymap.set("n", "<leader>dr", ":lua require 'dap'.repl.open()<cr>") ]]
+  end
 
-vim.fn.sign_define("DapBreakpoint", { text = "❌", texthl = "Yellow", linehl = "", numhl = "Yellow" })
-vim.fn.sign_define("DapStopped", { text = "☕", texthl = "Green", linehl = "ColorColumn", numhl = "Green" })
+  dap.listeners.before.event_terminated["dapui_config"] = function()
+    dap_ui.close()
+  end
 
-require("user.dap.adapters").setup()
+  dap.listeners.before.event_exited["dapui_config"] = function()
+    dap_ui.close()
+  end
+
+  neodev.setup({
+    library = {
+      plugins = {
+        "nvim-dap-ui"
+      },
+      types = true
+    }
+  })
+end
+
+local function setup_debuggers()
+  require("user.dap.adapters").setup()
+  require("user.dap.rust").setup()
+  require("user.dap.go").setup()
+end
+
+local function setup()
+  setup_extensions()
+  setup_debuggers()
+end
+
+setup()

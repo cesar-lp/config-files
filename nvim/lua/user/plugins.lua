@@ -59,8 +59,10 @@ return packer.startup(function(use)
 	use { "folke/which-key.nvim", commit = "5224c261825263f46f6771f1b644cae33cd06995" }
 
   -- Colorschemes
-  use { "folke/tokyonight.nvim", commit = "66bfc2e8f754869c7b651f3f47a2ee56ae557764" }
+  use { "folke/tokyonight.nvim", commmit = "a0abe53df53616d13da327636cb0bcac3ea7f5af" }
   use { "ellisonleao/gruvbox.nvim", commit = "73f009df5ed929a853244c413bb52c1d02c117ce" }
+  use { "neanias/everforest-nvim" }
+  use { "rebelot/kanagawa.nvim", commit = "4c8d48726621a7f3998c7ed35b2c2535abc22def" }
 
   -- cmp plugins
   use { "hrsh7th/nvim-cmp", commit = "b0dff0ec4f2748626aae13f011d1a47071fe9abc" } -- The completion plugin
