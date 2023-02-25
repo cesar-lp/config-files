@@ -69,6 +69,49 @@ neodev.setup({
 vim.fn.sign_define("DapBreakpoint", { text = "❌", texthl = "Yellow", linehl = "", numhl = "Yellow" })
 vim.fn.sign_define("DapStopped", { text = "☕", texthl = "Green", linehl = "ColorColumn", numhl = "Green" })
 
+dap.adapters.lldb = {
+  type = 'executable',
+  -- El de abajo no lo encuentra
+  --[[ command = '/usr/bin/lldb-vscode', ]]
+  -- El de abajo lo ejecuta pero rompe por algo de la arq
+  --[[ command = '/home/cp/.vscode/extensions/llvm-org.lldb-vscode-0.1.0/bin/lldb-vscode', ]] 
+  command = '/usr/bin/lldb-vscode-14',
+  name = 'lldb'
+}
+
+-- C++
+dap.configurations.cpp = {
+  {
+    name = "Launch",
+    type = "lldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = {},
+
+    -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
+    --
+    --    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+    --
+    -- Otherwise you might get the following error:
+    --
+    --    Error on launch: Failed to attach to the target process
+    --
+    -- But you should be aware of the implications:
+    -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
+    runInTerminal = false,
+  },
+}
+
+-- C
+dap.configurations.c = dap.configurations.cpp
+
+-- Rust
+dap.configurations.rust = dap.configurations.cpp
+
 -- Golang
 dap.adapters.go = function(callback, config)
 	local stdout = vim.loop.new_pipe(false)
