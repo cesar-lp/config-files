@@ -1,5 +1,6 @@
 local function setup_extensions()
   local dap, neodev, dap_ui, dap_vt = require "dap", require "neodev", require "dapui", require "nvim-dap-virtual-text"
+  local stackmap = require 'stackmap'
 
   --[[ vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg = 0, fg = '#993939', bg = '#31353f' }) ]]
   --[[ vim.api.nvim_set_hl(0, 'DapLogPoint', { ctermbg = 0, fg = '#61afef', bg = '#31353f' }) ]]
@@ -24,10 +25,11 @@ local function setup_extensions()
     dap_ui.open()
 
     -- TODO: change colors of TODO text
-    -- TODO: these maps should be temporary
-    vim.keymap.set("n", "@", ":lua require 'dap'.step_over()<cr>")
-    vim.keymap.set("n", "#", ":lua require 'dap'.step_into()<cr>")
-    vim.keymap.set("n", "$", ":lua require 'dap'.step_out()<cr>")
+    stackmap.push("debugging_shortcuts", "n", {
+      ["@"] = ":lua require 'dap'.step_over()<cr>",
+      ["#"] = ":lua require 'dap'.step_into()<cr>",
+      ["$"] = ":lua require 'dap'.step_out()<cr>"
+    })
 
 --[[ vim.keymap.set("n", "<F5>", ":lua require 'dap'.continue()<cr>") ]]
 --[[ vim.keymap.set("n", "<leader>b", ":lua require 'dap'.toggle_breakpoint()<cr>") ]]
@@ -37,10 +39,12 @@ local function setup_extensions()
   end
 
   dap.listeners.before.event_terminated["dapui_config"] = function()
+    stackmap.pop("debugging_shortcuts", "n")
     dap_ui.close()
   end
 
   dap.listeners.before.event_exited["dapui_config"] = function()
+    stackmap.pop("debugging_shortcuts", "n")
     dap_ui.close()
   end
 

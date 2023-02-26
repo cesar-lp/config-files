@@ -63,6 +63,7 @@ local plugins = {
     commit = "3b754285635a66a93aeb15fa71a23417d8997217" 
   },
   { "folke/neodev.nvim", commit = "6d362921d772963e5a5e5ed0fcf82153defaf206" },
+  { "tjdevries/stackmap.nvim", commit = "e83792ecd770c0ad2abff6a81c3bdf0bdee93bc5" },
 
   -- Telescope
   { "nvim-telescope/telescope.nvim", commit = "76ea9a898d3307244dce3573392dcf2cc38f340f" },
