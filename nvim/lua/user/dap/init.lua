@@ -12,7 +12,7 @@ local function setup_extensions()
   vim.api.nvim_set_hl(0, "lightblue", { fg = "#2A9FB4" })
 
   vim.fn.sign_define("DapBreakpoint", { text = "➤", texthl = "green", linehl = "DapBreakpoint", numhl = "DapBreakpoint" })
-  vim.fn.sign_define("DapStopped", { text = "➤", texthl = "orange", linehl = "lightblue", numhl = "orange" })
+  vim.fn.sign_define("DapStopped", { text = "➤", texthl = "orange", linehl = "orange", numhl = "orange" })
   vim.fn.sign_define('DapBreakpointCondition', { text='•', texthl='blue',   linehl='DapBreakpoint', numhl='DapBreakpoint' })
   vim.fn.sign_define('DapBreakpointRejected',  { text='•', texthl='orange', linehl='DapBreakpoint', numhl='DapBreakpoint' })
   vim.fn.sign_define('DapLogPoint',            { text='•', texthl='yellow', linehl='DapBreakpoint', numhl='DapBreakpoint' })
@@ -22,6 +22,9 @@ local function setup_extensions()
 
   dap.listeners.after.event_initialized["dapui_config"] = function()
     dap_ui.open()
+
+    -- TODO: change colors of TODO text
+    -- TODO: these maps should be temporary
     vim.keymap.set("n", "@", ":lua require 'dap'.step_over()<cr>")
     vim.keymap.set("n", "#", ":lua require 'dap'.step_into()<cr>")
     vim.keymap.set("n", "$", ":lua require 'dap'.step_out()<cr>")
@@ -55,6 +58,7 @@ local function setup_debuggers()
   require("user.dap.adapters").setup()
   require("user.dap.rust").setup()
   require("user.dap.go").setup()
+  require("user.dap.ts").setup()
 end
 
 local function setup()

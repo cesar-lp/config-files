@@ -28,6 +28,7 @@
   "nvim-dap-go": { "branch": "main", "commit": "b4ded7de579b4e2a85c203388233b54bf1028816" },
   "nvim-dap-ui": { "branch": "master", "commit": "1cd4764221c91686dcf4d6b62d7a7b2d112e0b13" },
   "nvim-dap-virtual-text": { "branch": "master", "commit": "8db23ea51203b5f00ad107a0cef7e0b2d7a0476c" },
+  "nvim-dap-vscode-js": { "branch": "main", "commit": "baff224af20c6632861a59aa742c9740c68030de" },
   "nvim-lspconfig": { "branch": "master", "commit": "f11fdff7e8b5b415e5ef1837bdcdd37ea6764dda" },
   "nvim-tree.lua": { "branch": "master", "commit": "7282f7de8aedf861fe0162a559fc2b214383c51c" },
   "nvim-treesitter": { "branch": "master", "commit": "8e763332b7bf7b3a426fd8707b7f5aa85823a5ac" },
