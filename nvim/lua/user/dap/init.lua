@@ -63,6 +63,7 @@ local function setup_debuggers()
   require("user.dap.rust").setup()
   require("user.dap.go").setup()
   require("user.dap.ts").setup()
+  require("user.dap.kotlin").setup()
 end
 
 local function setup()

@@ -8,7 +8,7 @@ local servers = {
   "yamlls",
   "rust_analyzer",
   "gopls",
-  "kotlin-language-server"
+  "kotlin_language_server"
 }
 
 local settings = {
