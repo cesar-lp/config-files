@@ -117,12 +117,9 @@ local mappings = {
   },
 
   p = {
-    name = "Packer",
-    c = { "<cmd>PackerCompile<cr>", "Compile" },
-    i = { "<cmd>PackerInstall<cr>", "Install" },
-    s = { "<cmd>PackerSync<cr>", "Sync" },
-    S = { "<cmd>PackerStatus<cr>", "Status" },
-    u = { "<cmd>PackerUpdate<cr>", "Update" },
+    name = "Plugins",
+    i = { "<cmd>lua require 'lazy'.home()<cr>", "Info" },
+    h = { "<cmd>lua require 'lazy'.health()<cr>", "Health" },
   },
 
   g = {
