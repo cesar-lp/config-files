@@ -51,7 +51,7 @@ local setup = {
     winblend = 0,
   },
   layout = {
-    height = { min = 4, max = 25 }, -- min and max height of the columns
+    height = { min = 3, max = 25 }, -- min and max height of the columns
     width = { min = 20, max = 50 }, -- min and max width of the columns
     spacing = 3, -- spacing between columns
     align = "left", -- align columns left, center or right
@@ -169,12 +169,9 @@ local mappings = {
 
   s = {
     name = "Search",
-    f = {
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{ previewer =  false })<cr>",
-      "Search files",
-    },
-    p = { "<cmd>Telescope oldfiles<cr>", "Previous opened files" },
-    P = { "<cmd>lua require('telescope.builtin').resume()<cr>", "Previous search" },
+    f = { "<cmd>lua require('telescope.builtin').find_files()<cr>", "Search files" },
+    o = { "<cmd>Telescope oldfiles<cr>", "Old files" },
+    p = { "<cmd>lua require('telescope.builtin').resume()<cr>", "Previous search" },
     r = { "<cmd>Telescope grep_string<cr>", "Search references" },
     t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Search text" },
     T = { "<cmd>lua require('telescope.builtin').grep_string { default_text = 'TODO'}<cr>", "Find TODOs" },
