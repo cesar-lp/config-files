@@ -82,6 +82,10 @@ local plugins = {
   { "leoluz/nvim-dap-go", commit = "b4ded7de579b4e2a85c203388233b54bf1028816" },
   { "theHamsta/nvim-dap-virtual-text", commit = "8db23ea51203b5f00ad107a0cef7e0b2d7a0476c" },
   { "mxsdev/nvim-dap-vscode-js", dependencies = { "mfussenegger/nvim-dap" } },
+
+  -- Folding
+  { "mxsdev/nvim-dap-vscode-js", dependencies = { "mfussenegger/nvim-dap" } },
+  { "kevinhwang91/nvim-ufo", dependencies = { 'kevinhwang91/promise-async' } }
 }
 
 local opts = {}

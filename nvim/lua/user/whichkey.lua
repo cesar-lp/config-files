@@ -198,7 +198,7 @@ local mappings = {
     h = { "<cmd>Telescope help_tags<cr>", "Show Help" },
     m = { "<cmd>Telescope man_pages<cr>", "Show Man Pages" },
     r = { "<cmd>Telescope registers<cr>", "Show Registers" },
-  }
+  },
 }
 
 which_key.setup(setup)
