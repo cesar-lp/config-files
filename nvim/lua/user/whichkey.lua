@@ -90,7 +90,7 @@ local mappings = {
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-  ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+  ["p"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
 
   C = {
     name = "Close Buffer",
@@ -111,18 +111,11 @@ local mappings = {
 --[[ vim.keymap.set("n", "<leader>lp", ":lua require 'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>") ]]
   },
 
-  f = {
-    name = "Find",
-    f = {
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{ previewer =  false })<cr>",
-      "Files",
-    },
-    s = { "<cmd>Telescope live_grep theme=ivy<cr>", "Search" },
-    t = { "<cmd>lua require('telescope.builtin').grep_string { default_text = 'todo'}<cr>", "TODOs" },
-  },
-
   g = {
     name = "Git",
+    b = { "<cmd>Telescope git_branches<cr>", "Branches" },
+    c = { "<cmd>Telescope git_commits<cr>", "Commits" },
+    d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
     g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
@@ -130,17 +123,11 @@ local mappings = {
     p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
     r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-    s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+    --[[ s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" }, ]]
+    s = { "<cmd>Telescope git_status<cr>", "Status" },
     u = {
       "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
       "Undo Stage Hunk",
-    },
-    o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-    d = {
-      "<cmd>Gitsigns diffthis HEAD<cr>",
-      "Diff",
     },
   },
 
@@ -174,7 +161,7 @@ local mappings = {
     },
   },
 
-  p = {
+  P = {
     name = "Plugins",
     i = { "<cmd>lua require 'lazy'.home()<cr>", "Info" },
     h = { "<cmd>lua require 'lazy'.health()<cr>", "Health" },
@@ -182,14 +169,15 @@ local mappings = {
 
   s = {
     name = "Search",
-    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-    h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
-    M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-    r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-    R = { "<cmd>Telescope registers<cr>", "Registers" },
-    k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-    C = { "<cmd>Telescope commands<cr>", "Commands" },
+    f = {
+      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{ previewer =  false })<cr>",
+      "Search files",
+    },
+    p = { "<cmd>Telescope oldfiles<cr>", "Previous opened files" },
+    P = { "<cmd>lua require('telescope.builtin').resume()<cr>", "Previous search" },
+    r = { "<cmd>Telescope grep_string<cr>", "Search references" },
+    t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Search text" },
+    T = { "<cmd>lua require('telescope.builtin').grep_string { default_text = 'TODO'}<cr>", "Find TODOs" },
   },
 
   t = {
@@ -202,6 +190,15 @@ local mappings = {
     h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
   },
+
+  u = {
+    name = "Utilities",
+    c = { "<cmd>Telescope commands<cr>", "Show Commands" },
+    k = { "<cmd>Telescope keymaps<cr>", "Show Keymaps" },
+    h = { "<cmd>Telescope help_tags<cr>", "Show Help" },
+    m = { "<cmd>Telescope man_pages<cr>", "Show Man Pages" },
+    r = { "<cmd>Telescope registers<cr>", "Show Registers" },
+  }
 }
 
 which_key.setup(setup)
