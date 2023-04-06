@@ -90,11 +90,6 @@ local mappings = {
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-  ["f"] = {
-    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-    "Find files",
-  },
-  ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
   ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
 
   C = {
@@ -116,10 +111,14 @@ local mappings = {
 --[[ vim.keymap.set("n", "<leader>lp", ":lua require 'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>") ]]
   },
 
-  p = {
-    name = "Plugins",
-    i = { "<cmd>lua require 'lazy'.home()<cr>", "Info" },
-    h = { "<cmd>lua require 'lazy'.health()<cr>", "Health" },
+  f = {
+    name = "Find",
+    f = {
+      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{ previewer =  false })<cr>",
+      "Files",
+    },
+    s = { "<cmd>Telescope live_grep theme=ivy<cr>", "Search" },
+    t = { "<cmd>lua require('telescope.builtin').grep_string { default_text = 'todo'}<cr>", "TODOs" },
   },
 
   g = {
@@ -175,6 +174,12 @@ local mappings = {
     },
   },
 
+  p = {
+    name = "Plugins",
+    i = { "<cmd>lua require 'lazy'.home()<cr>", "Info" },
+    h = { "<cmd>lua require 'lazy'.health()<cr>", "Health" },
+  },
+
   s = {
     name = "Search",
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
@@ -187,7 +192,7 @@ local mappings = {
     C = { "<cmd>Telescope commands<cr>", "Commands" },
   },
 
-  T = {
+  t = {
     name = "Terminal",
     n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
     u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
