@@ -1,3 +1,4 @@
+source ~/Projects/zsh-snap/znap.zsh
 # If you come from bash you might have to change your $PATH.
 export GOPATH=$HOME/go
 export GRADLE_HOME=/opt/gradle/gradle-7.4.2
@@ -111,6 +112,7 @@ source $ZSH/oh-my-zsh.sh
 # -------------------------- Aliases ----------------------------
 alias ls="exa"
 alias cat="batcat"
+alias cd="z"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -121,3 +123,30 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+
+
+# Zsh-snap
+# Download Znap, if it's not there yet.
+[[ -f ~/.config/zsh-snap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git ~/.config/zsh-snap
+
+source ~/.config/zsh-snap/znap.zsh  # Start Znap
+
+# `znap prompt` makes your prompt visible in just 15-40ms!
+znap prompt sindresorhus/pure
+
+# `znap source` automatically downloads and starts your plugins.
+
+# TODO(06/04/23): This one below does not work, check latter if fixed
+# znap source marlonrichert/zsh-autocomplete
+znap source zsh-users/zsh-autosuggestions
+znap source zsh-users/zsh-syntax-highlighting
+
+# `znap eval` caches and runs any kind of command output for you.
+znap eval iterm2 'curl -fsSL https://iterm2.com/shell_integration/zsh'
+
+# `znap function` lets you lazy-load features you don't always need.
+znap function _pyenv pyenv 'eval "$( pyenv init - --no-rehash )"'
+compctl -K    _pyenv pyenv
